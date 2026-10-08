@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORTE — Dashboard Siswa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/forte-logo.png">
+  <script src="js/config.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/siswa-dashboard.js" defer></script>
+</head>
+<body class="app-layout dashboard">
+  <header class="topbar">
+    <div class="brand">
+      <img src="img/forte.png" alt="Logo FORTE" style="height: 38px; width: auto; max-width: 150px; object-fit: contain; display: block;">
+      <div><strong style="display:none;">FORTE</strong><small>Dashboard Siswa</small></div>
+    </div>
+    <div class="user-actions">
+      <button type="button" class="btn outline small" id="logout">Keluar</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Profil Identitas Siswa -->
+    <section class="card profile-card">
+      <div class="profile-header">
+        <div class="avatar">S</div>
+        <div>
+          <h2 id="p-nama">Nama Siswa</h2>
+          <p class="subtitle" style="margin-bottom:0;">Identitas Peserta Didik</p>
+        </div>
+      </div>
+      <div class="profile-details grid-2" style="margin-top: 20px;">
+        <div class="field"><span>Nomor Induk (NIS/NISN)</span><strong id="p-nis" class="data-val">-</strong></div>
+        <div class="field"><span>Kelas</span><strong id="p-kelas" class="data-val">-</strong></div>
+      </div>
+    </section>
+
+    <!-- Masukkan Kode Tes -->
+    <section class="card form-card">
+      <h2>Mulai Tes Diagnostik</h2>
+      <p class="subtitle">Masukkan kode tes yang diberikan oleh guru mata pelajaranmu.</p>
+      <form id="join-form" class="row">
+        <input type="text" id="s-kode" placeholder="Masukkan Kode Tes (Contoh: XIC-1234)" required style="text-transform: uppercase;">
+        <button type="submit" class="btn primary">Cari & Mulai Tes</button>
+      </form>
+      <p id="msg" class="msg"></p>
+    </section>
+  </main>
+</body>
+</html>

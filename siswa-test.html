@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORTE — Mengerjakan Tes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/forte-logo.png">
+  <script src="js/config.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/siswa-test.js" defer></script>
+</head>
+<body class="app-layout">
+  <header class="topbar">
+    <div class="brand">
+      <img src="img/forte.png" alt="Logo FORTE" style="height: 38px; width: auto; max-width: 150px; object-fit: contain; display: block;">
+      <div><strong style="display:none;">FORTE</strong><small id="test-mapel">Tes Sedang Berlangsung</small></div>
+    </div>
+    <span id="who" class="user-badge"></span>
+  </header>
+
+  <main class="container">
+    <form id="test-form">
+      <div class="page-header">
+        <h1>Tes Diagnostik</h1>
+        <p class="subtitle">Pilih jawaban dan alasan yang menurutmu paling tepat, serta tentukan tingkat keyakinanmu.</p>
+      </div>
+      
+      <div id="questions" class="questions-container"></div>
+      
+      <div class="submit-area card">
+        <p id="msg" class="msg" aria-live="polite"></p>
+        <button type="submit" class="btn primary btn-large" id="submit-btn">Kirim Semua Jawaban</button>
+      </div>
+    </form>
+
+    <section id="done" class="card hidden center-text success-card">
+      <div class="success-icon">✓</div>
+      <h2>Jawaban Berhasil Terkirim</h2>
+      <p>Terima kasih telah mengerjakan tes. Hasil analisismu sudah dikirim ke guru.</p>
+      <br>
+      <a class="btn secondary" href="siswa-dashboard.html">Kembali ke Dashboard</a>
+    </section>
+  </main>
+</body>
+</html>

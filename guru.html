@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORTE — Dashboard Guru</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/forte-logo.png">
+  <script src="js/config.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/classify.js" defer></script>
+  <script src="js/guru.js" defer></script>
+</head>
+<body class="app-layout dashboard">
+  <header class="topbar">
+    <div class="brand">
+      <img src="img/forte.png" alt="Logo FORTE" style="height: 38px; width: auto; max-width: 150px; object-fit: contain; display: block;">
+      <div><strong style="display:none;">FORTE</strong><small>Dashboard Guru</small></div>
+    </div>
+    <div class="user-actions">
+      <button type="button" class="btn outline small" id="logout">Keluar</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Profil Guru -->
+    <section class="card profile-card">
+      <div class="profile-header">
+        <div class="avatar guru-avatar">G</div>
+        <div>
+          <h2 id="g-nama">Nama Guru</h2>
+          <p class="subtitle" style="margin-bottom:0;">Identitas Pengajar</p>
+        </div>
+      </div>
+      <div class="profile-details grid-2" style="margin-top: 20px;">
+        <div class="field"><span>NIP / ID Guru</span><strong id="g-nip" class="data-val">-</strong></div>
+        <div class="field"><span>Guru Mata Pelajaran</span><strong id="g-mapel" class="data-val">-</strong></div>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <!-- Buat Tes Baru -->
+      <section class="card form-card">
+        <h2>Buat Tes Baru</h2>
+        <form id="create-form" class="stack">
+          <input type="text" name="kelas" placeholder="Kelas (Mis: XI-C)" required>
+          <input type="text" name="materi" placeholder="Topik Materi (Mis: Listrik Dinamis)" required>
+          <button type="submit" class="btn primary">Buat Kode Tes</button>
+        </form>
+        <p id="create-msg" class="msg"></p>
+      </section>
+
+      <!-- Daftar Tes -->
+      <section class="card">
+        <h2>Daftar Tes Anda</h2>
+        <div class="table-wrap" style="max-height: 200px; overflow-y: auto;">
+          <table>
+            <thead><tr><th>Kode</th><th>Kelas</th><th>Materi</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="tests-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tambah Soal Baru -->
+    <section class="card">
+      <h2>Tambah Soal ke Database</h2>
+      <p class="subtitle">Buat pertanyaan 4-Tier Diagnostic baru.</p>
+      <form id="add-q-form" class="stack">
+        <div class="row"><input type="text" name="materi" placeholder="Topik Materi (Cth: Listrik Dinamis)" required style="width: 100%;"></div>
+        <div class="field"><span>Teks Soal</span><textarea name="soal" required rows="3" class="input-area"></textarea></div>
+        
+        <div class="grid-2">
+          <div class="field"><span>Pilihan Jawaban (A-D)</span>
+            <input type="text" name="a1" placeholder="Pilihan 1 (A)" required>
+            <input type="text" name="a2" placeholder="Pilihan 2 (B)" required>
+            <input type="text" name="a3" placeholder="Pilihan 3 (C)" required>
+            <input type="text" name="a4" placeholder="Pilihan 4 (D)" required>
+            <label class="field" style="margin-top: 8px;"><span>Kunci Jawaban Benar (1-4)</span>
+              <input type="number" name="kunci_a" min="1" max="4" required>
+            </label>
+          </div>
+          <div class="field"><span>Pilihan Alasan (1-4)</span>
+            <input type="text" name="r1" placeholder="Alasan 1" required>
+            <input type="text" name="r2" placeholder="Alasan 2" required>
+            <input type="text" name="r3" placeholder="Alasan 3" required>
+            <input type="text" name="r4" placeholder="Alasan 4" required>
+            <label class="field" style="margin-top: 8px;"><span>Kunci Alasan Benar (1-4)</span>
+              <input type="number" name="kunci_r" min="1" max="4" required>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn secondary">Simpan Soal ke Database</button>
+        <p id="add-q-msg" class="msg"></p>
+      </form>
+    </section>
+
+    <!-- Hasil Analisis -->
+    <section id="report" class="hidden stack">
+      <div class="card">
+        <div class="row between header-row">
+          <h2 id="report-title">Statistik Kelas</h2>
+          <button type="button" class="btn outline" id="export-csv">Ekspor CSV</button>
+        </div>
+        <div id="summary" class="summary-grid"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Analisis Per Soal</h2>
+          <div class="table-wrap">
+            <table><thead id="q-head"></thead><tbody id="q-body"></tbody></table>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Pola Miskonsepsi Terbanyak</h2>
+          <ul id="patterns" class="pattern-list"></ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Hasil Detail Per Siswa</h2>
+        <div class="table-wrap">
+          <table><thead id="s-head"></thead><tbody id="s-body"></tbody></table>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
