@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORTE — Buat Tes Baru</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./img/forte-logo.png">
+
+  <script src="./js/config.js" defer></script>
+  <script src="./js/api.js" defer></script>
+  <script src="./js/buat-tes.js" defer></script>
+</head>
+<body class="app-layout builder-page">
+  <header class="topbar">
+    <a class="brand" href="guru.html" aria-label="Dashboard Guru">
+      <img
+        src="./img/forte-logo.png"
+        alt="Logo FORTE"
+        width="40"
+        height="40"
+      >
+      <span class="brand-text">
+        <small>Buat Tes Diagnostik</small>
+      </span>
+    </a>
+
+    <a href="guru.html" class="btn primary small">
+      Kembali ke Dashboard
+    </a>
+  </header>
+
+  <main class="container builder-container">
+    <a href="guru.html" class="btn outline small back-link">
+      <span aria-hidden="true">←</span>
+      Dashboard Guru
+    </a>
+
+    <section class="builder-heading">
+      <p class="eyebrow">Penyusunan tes</p>
+      <h1>Buat Tes Diagnostik</h1>
+      <p>
+        Isi informasi tes dan susun soal. Setelah dipublikasikan, FORTE akan
+        membuat token untuk dibagikan kepada siswa.
+      </p>
+    </section>
+
+    <form id="create-test-form" class="card stack">
+      <div>
+        <p class="eyebrow">Informasi dan soal</p>
+        <h2>Susun Tes Four-Tier</h2>
+        <p class="subtitle">
+          Isi kelas dan materi, lalu tambahkan satu atau beberapa soal.
+        </p>
+      </div>
+
+      <div class="form-grid">
+        <label class="field">
+          <span>Kelas</span>
+          <input
+            type="text"
+            name="kelas"
+            placeholder="Contoh: XI-C"
+            required
+          >
+        </label>
+
+        <label class="field">
+          <span>Topik materi</span>
+          <input
+            type="text"
+            name="materi"
+            placeholder="Contoh: Listrik Dinamis"
+            required
+          >
+        </label>
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Soal Four-Tier</h2>
+          <p class="subtitle">
+            Lengkapi pertanyaan, pilihan jawaban, alasan, serta kuncinya.
+          </p>
+        </div>
+
+        <button type="button" class="btn outline" id="add-question">
+          + Tambah Soal
+        </button>
+      </div>
+
+      <div id="question-list" class="question-list"></div>
+
+      <div class="builder-submit">
+        <p id="create-test-msg" class="msg" aria-live="polite"></p>
+        <button type="submit" class="btn primary btn-large" id="save-test">
+          Publikasikan Tes dan Buat Token
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="created-test"
+      class="card created-test hidden"
+      aria-live="polite"
+    >
+      <div class="created-icon">✓</div>
+      <p class="eyebrow">Tes berhasil dipublikasikan</p>
+      <h2>Token tes siap dibagikan</h2>
+      <p id="created-test-info" class="subtitle"></p>
+
+      <div class="code-display">
+        <span id="created-test-token"></span>
+        <button type="button" class="btn outline small" id="copy-token">
+          Salin Token
+        </button>
+      </div>
+
+      <div class="created-actions">
+        <button type="button" class="btn secondary" id="create-another">
+          Buat Tes Lagi
+        </button>
+        <a href="guru.html" class="btn primary">Kembali ke Dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <template id="question-template">
+    <article class="question-editor">
+      <div class="question-editor-heading">
+        <div>
+          <span class="question-number">Soal 1</span>
+          <p>Isi pertanyaan dan semua pilihan jawabannya.</p>
+        </div>
+
+        <button
+          type="button"
+          class="btn outline small remove-question hidden"
+        >
+          Hapus
+        </button>
+      </div>
+
+      <label class="field">
+        <span>Teks soal</span>
+        <textarea
+          name="soal"
+          rows="3"
+          placeholder="Tulis pertanyaan diagnostik..."
+          required
+        ></textarea>
+      </label>
+
+      <div class="choice-grid">
+        <fieldset class="choice-panel">
+          <legend>Pilihan jawaban</legend>
+
+          <label class="field">
+            <span>A</span>
+            <input type="text" name="a1" required>
+          </label>
+          <label class="field">
+            <span>B</span>
+            <input type="text" name="a2" required>
+          </label>
+          <label class="field">
+            <span>C</span>
+            <input type="text" name="a3" required>
+          </label>
+          <label class="field">
+            <span>D</span>
+            <input type="text" name="a4" required>
+          </label>
+
+          <label class="field answer-key">
+            <span>Kunci jawaban benar</span>
+            <select name="kunci_a" required>
+              <option value="">Pilih jawaban benar</option>
+              <option value="1">A</option>
+              <option value="2">B</option>
+              <option value="3">C</option>
+              <option value="4">D</option>
+            </select>
+          </label>
+        </fieldset>
+
+        <fieldset class="choice-panel">
+          <legend>Pilihan alasan</legend>
+
+          <label class="field">
+            <span>Alasan 1</span>
+            <input type="text" name="r1" required>
+          </label>
+          <label class="field">
+            <span>Alasan 2</span>
+            <input type="text" name="r2" required>
+          </label>
+          <label class="field">
+            <span>Alasan 3</span>
+            <input type="text" name="r3" required>
+          </label>
+          <label class="field">
+            <span>Alasan 4</span>
+            <input type="text" name="r4" required>
+          </label>
+
+          <label class="field answer-key">
+            <span>Kunci alasan benar</span>
+            <select name="kunci_r" required>
+              <option value="">Pilih alasan benar</option>
+              <option value="1">Alasan 1</option>
+              <option value="2">Alasan 2</option>
+              <option value="3">Alasan 3</option>
+              <option value="4">Alasan 4</option>
+            </select>
+          </label>
+        </fieldset>
+      </div>
+    </article>
+  </template>
+</body>
+</html>
