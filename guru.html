@@ -19,6 +19,7 @@
       <div><strong style="display:none;">FORTE</strong><small>Dashboard Guru</small></div>
     </div>
     <div class="user-actions">
+      <a href="tambah-akun.html" class="btn secondary small">Tambah Akun Baru</a>
       <button type="button" class="btn outline small" id="logout">Keluar</button>
     </div>
   </header>
@@ -27,7 +28,7 @@
     <!-- Profil Guru -->
     <section class="card profile-card">
       <div class="profile-header">
-        <div class="avatar guru-avatar">G</div>
+        <div class="avatar guru-avatar">Guru</div>
         <div>
           <h2 id="g-nama">Nama Guru</h2>
           <p class="subtitle" style="margin-bottom:0;">Identitas Pengajar</p>
@@ -39,64 +40,89 @@
       </div>
     </section>
 
+    <!-- Daftar Tes (Dipindah ke atas, Full Width) -->
+    <section class="card">
+      <h2>Daftar Tes Anda</h2>
+      <div class="table-wrap" style="max-height: 250px; overflow-y: auto;">
+        <table>
+          <thead><tr><th>Kode</th><th>Kelas</th><th>Materi</th><th>Status</th><th>Aksi</th></tr></thead>
+          <tbody id="tests-body"></tbody>
+        </table>
+      </div>
+    </section>
+
     <div class="grid-2">
       <!-- Buat Tes Baru -->
-      <section class="card form-card">
+      <section class="card form-card stack">
         <h2>Buat Tes Baru</h2>
+        <p class="subtitle" style="margin-bottom: 8px;">Tarik soal dari bank soal untuk diujikan.</p>
         <form id="create-form" class="stack">
           <input type="text" name="kelas" placeholder="Kelas (Mis: XI-C)" required>
-          <input type="text" name="materi" placeholder="Topik Materi (Mis: Listrik Dinamis)" required>
+          <input type="text" name="materi" placeholder="Pilih Topik Materi di Bank Soal" required>
           <button type="submit" class="btn primary">Buat Kode Tes</button>
         </form>
         <p id="create-msg" class="msg"></p>
       </section>
-
-      <!-- Daftar Tes -->
-      <section class="card">
-        <h2>Daftar Tes Anda</h2>
-        <div class="table-wrap" style="max-height: 200px; overflow-y: auto;">
-          <table>
-            <thead><tr><th>Kode</th><th>Kelas</th><th>Materi</th><th>Status</th><th>Aksi</th></tr></thead>
-            <tbody id="tests-body"></tbody>
-          </table>
-        </div>
-      </section>
     </div>
 
-    <!-- Tambah Soal Baru -->
-    <section class="card">
+    <!-- Tambah Soal Baru (Mode Banyak/Batch) -->
+    <section class="card stack">
       <h2>Tambah Soal ke Database</h2>
-      <p class="subtitle">Buat pertanyaan 4-Tier Diagnostic baru.</p>
+      <p class="subtitle">Buat banyak pertanyaan sekaligus untuk satu topik materi.</p>
+      
       <form id="add-q-form" class="stack">
-        <div class="row"><input type="text" name="materi" placeholder="Topik Materi (Cth: Listrik Dinamis)" required style="width: 100%;"></div>
-        <div class="field"><span>Teks Soal</span><textarea name="soal" required rows="3" class="input-area"></textarea></div>
-        
-        <div class="grid-2">
-          <div class="field"><span>Pilihan Jawaban (A-D)</span>
-            <input type="text" name="a1" placeholder="Pilihan 1 (A)" required>
-            <input type="text" name="a2" placeholder="Pilihan 2 (B)" required>
-            <input type="text" name="a3" placeholder="Pilihan 3 (C)" required>
-            <input type="text" name="a4" placeholder="Pilihan 4 (D)" required>
-            <label class="field" style="margin-top: 8px;"><span>Kunci Jawaban Benar (1-4)</span>
-              <input type="number" name="kunci_a" min="1" max="4" required>
-            </label>
-          </div>
-          <div class="field"><span>Pilihan Alasan (1-4)</span>
-            <input type="text" name="r1" placeholder="Alasan 1" required>
-            <input type="text" name="r2" placeholder="Alasan 2" required>
-            <input type="text" name="r3" placeholder="Alasan 3" required>
-            <input type="text" name="r4" placeholder="Alasan 4" required>
-            <label class="field" style="margin-top: 8px;"><span>Kunci Alasan Benar (1-4)</span>
-              <input type="number" name="kunci_r" min="1" max="4" required>
-            </label>
-          </div>
+        <!-- Topik materi cukup diisi 1 kali di atas -->
+        <div class="row">
+          <input type="text" id="q-materi" placeholder="Topik Materi (Cth: Listrik Dinamis)" required style="width: 100%; font-weight: bold;">
         </div>
-        <button type="submit" class="btn secondary">Simpan Soal ke Database</button>
+        
+        <!-- Wadah penampung kotak-kotak soal -->
+        <div id="questions-container" class="stack">
+          
+          <!-- Kotak Soal ke-1 -->
+          <div class="question-block" style="background: #F8FAFC; padding: 16px; border: 1px solid var(--border); border-radius: 8px;">
+            <div class="row between" style="margin-bottom: 12px;">
+               <h3 style="margin-bottom: 0;">Soal #<span class="q-number">1</span></h3>
+               <button type="button" class="btn outline small remove-q hidden" style="color: var(--red); border-color: var(--red);">Hapus</button>
+            </div>
+            
+            <div class="field stack" style="gap: 12px;">
+              <div class="field"><span>Teks Soal</span><textarea name="soal" required rows="3" class="input-area" style="width: 100%;"></textarea></div>
+              
+              <div class="grid-2">
+                <div class="field"><span>Pilihan Jawaban (A-D)</span>
+                  <input type="text" name="a1" placeholder="Pilihan 1 (A)" required>
+                  <input type="text" name="a2" placeholder="Pilihan 2 (B)" required>
+                  <input type="text" name="a3" placeholder="Pilihan 3 (C)" required>
+                  <input type="text" name="a4" placeholder="Pilihan 4 (D)" required>
+                  <label class="field" style="margin-top: 8px;"><span>Kunci Jawaban Benar (1-4)</span>
+                    <input type="number" name="kunci_a" min="1" max="4" required>
+                  </label>
+                </div>
+                <div class="field"><span>Pilihan Alasan (1-4)</span>
+                  <input type="text" name="r1" placeholder="Alasan 1" required>
+                  <input type="text" name="r2" placeholder="Alasan 2" required>
+                  <input type="text" name="r3" placeholder="Alasan 3" required>
+                  <input type="text" name="r4" placeholder="Alasan 4" required>
+                  <label class="field" style="margin-top: 8px;"><span>Kunci Alasan Benar (1-4)</span>
+                    <input type="number" name="kunci_r" min="1" max="4" required>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tombol Tambah Kotak Soal -->
+        <button type="button" id="btn-add-more" class="btn outline" style="border-style: dashed; padding: 12px; font-weight: bold; color: var(--text-muted);">+ Tambah Form Soal Lainnya</button>
+
+        <button type="submit" class="btn secondary btn-large" style="margin-top: 16px;">Simpan Semua Soal ke Database</button>
         <p id="add-q-msg" class="msg"></p>
       </form>
     </section>
 
-    <!-- Hasil Analisis -->
+    <!-- Hasil Analisis (Tidak ada yg diubah, biarkan seperti aslinya) -->
     <section id="report" class="hidden stack">
       <div class="card">
         <div class="row between header-row">

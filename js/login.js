@@ -6,7 +6,7 @@ if (formLogin) {
     e.preventDefault();
     const btn = formLogin.querySelector("button");
     const oriText = btn.textContent;
-    btn.disabled = true; btn.textContent = "Memeriksa Kredensial..."; msg.textContent = "";
+    btn.disabled = true; btn.textContent = "Mohon Tunggu..."; msg.textContent = "";
 
     const res = await api("login", {
       username: document.querySelector("#username").value.trim(),

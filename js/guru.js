@@ -17,20 +17,89 @@ if (session) {
   loadTests();
 }
 
-// Tambah Soal Listener
+// ================= FITUR TAMBAH BANYAK SOAL SEKALIGUS =================
+const qContainer = document.querySelector("#questions-container");
+const btnAddMore = document.querySelector("#btn-add-more");
+
+if (btnAddMore && qContainer) {
+  // Tombol untuk menggandakan form soal
+  btnAddMore.addEventListener("click", () => {
+    const blocks = qContainer.querySelectorAll(".question-block");
+    const clone = blocks[0].cloneNode(true);
+    
+    // Kosongkan isian di form baru
+    clone.querySelectorAll("input, textarea").forEach(el => el.value = "");
+    
+    // Update nomor soal
+    clone.querySelector(".q-number").textContent = blocks.length + 1;
+    
+    // Tampilkan tombol hapus untuk form tambahan ini
+    const btnRemove = clone.querySelector(".remove-q");
+    btnRemove.classList.remove("hidden");
+    btnRemove.addEventListener("click", () => {
+      clone.remove();
+      updateQNumbers();
+    });
+
+    qContainer.appendChild(clone);
+  });
+}
+
+function updateQNumbers() {
+  qContainer.querySelectorAll(".question-block").forEach((block, index) => {
+    block.querySelector(".q-number").textContent = index + 1;
+  });
+}
+
+// Logika untuk mengirim (Submit) Array Data Soal
 $("#add-q-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const f = new FormData(e.target);
-  const btn = e.target.querySelector("button");
+  const btn = e.target.querySelector("button[type='submit']");
   const msg = $("#add-q-msg");
-  btn.disabled = true; msg.textContent = "Menyimpan ke database...";
   
-  const res = await call("addQuestion", Object.fromEntries(f));
+  const materi = document.querySelector("#q-materi").value.trim();
+  const blocks = qContainer.querySelectorAll(".question-block");
+  const questionsData = [];
+
+  // Looping untuk merangkum semua form kotak soal
+  blocks.forEach(block => {
+    questionsData.push({
+      soal: block.querySelector("[name='soal']").value,
+      a1: block.querySelector("[name='a1']").value,
+      a2: block.querySelector("[name='a2']").value,
+      a3: block.querySelector("[name='a3']").value,
+      a4: block.querySelector("[name='a4']").value,
+      kunci_a: block.querySelector("[name='kunci_a']").value,
+      r1: block.querySelector("[name='r1']").value,
+      r2: block.querySelector("[name='r2']").value,
+      r3: block.querySelector("[name='r3']").value,
+      r4: block.querySelector("[name='r4']").value,
+      kunci_r: block.querySelector("[name='kunci_r']").value,
+    });
+  });
+
+  btn.disabled = true; 
+  msg.textContent = `Menyimpan ${questionsData.length} soal sekaligus...`;
+  msg.className = "msg";
+
+  // Memanggil fungsi baru di API bernama 'addQuestionsBatch'
+  const res = await call("addQuestionsBatch", { 
+    materi: materi,
+    data_soal: JSON.stringify(questionsData) 
+  });
+
   msg.className = `msg ${res.ok ? "ok" : ""}`;
-  msg.textContent = res.ok ? "Berhasil! Soal telah ditambahkan." : res.error;
+  msg.textContent = res.ok ? `Berhasil! ${questionsData.length} soal sukses ditambahkan ke bank soal.` : res.error;
   btn.disabled = false;
-  if(res.ok) e.target.reset();
+  
+  if(res.ok) {
+    e.target.reset();
+    // Hapus blok tambahan, kembalikan menjadi 1 form saja
+    const extraBlocks = qContainer.querySelectorAll(".question-block:not(:first-child)");
+    extraBlocks.forEach(b => b.remove());
+  }
 });
+// ======================================================================
 
 // Daftar Tes & Pembuatan Tes
 async function loadTests() {
@@ -141,4 +210,24 @@ $("#export-csv").addEventListener("click", () => {
   const blob = new Blob(["\ufeff" + [head.join(","), ...lines].join("\n")], { type: "text/csv;charset=utf-8" });
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `hasil-${current.kode}.csv`;
   a.click(); URL.revokeObjectURL(a.href);
+});
+
+// Listener untuk Form Tambah Akun Pengguna Baru
+$("#add-account-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const btn = e.target.querySelector("button");
+  const msg = $("#add-account-msg");
+  
+  btn.disabled = true; 
+  msg.textContent = "Mendaftarkan...";
+  
+  const res = await call("addAccount", Object.fromEntries(f));
+  msg.className = `msg ${res.ok ? "ok" : ""}`;
+  msg.textContent = res.ok ? "Akun berhasil didaftarkan!" : res.error;
+  btn.disabled = false;
+  
+  if (res.ok) { 
+    e.target.reset(); 
+  }
 });
