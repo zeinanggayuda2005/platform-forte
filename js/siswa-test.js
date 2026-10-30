@@ -45,10 +45,15 @@ if (session) {
       document.querySelector("#who").textContent = session.nama + " · " + session.info;
       document.querySelector("#test-mapel").textContent = "Materi: " + activeTest.materi;
 
-      questionContainer.innerHTML = (activeTest.questions || []).map((question) =>
-        '<article class="card student-question-card">' +
+      questionContainer.innerHTML = (activeTest.questions || []).map((question) => {
+        const image = question.gambar_url
+          ? '<figure class="question-image-display"><img src="' + esc(question.gambar_url) + '" alt="Gambar pada soal ' + esc(question.no) + '" loading="lazy"></figure>'
+          : "";
+
+        return '<article class="card student-question-card">' +
           '<h2>Soal ' + esc(question.no) + '</h2>' +
           '<p class="student-question-prompt math-text">' + esc(question.soal) + '</p>' +
+          image +
           '<fieldset class="tier"><legend>Tier 1 — Pilih Jawaban</legend>' +
             '<div class="option-list">' + renderOptions("q" + question.no + "-a", question.jawaban || []) + '</div>' +
           '</fieldset>' +
@@ -61,8 +66,8 @@ if (session) {
           '<fieldset class="tier"><legend>Tier 4 — Yakin dengan alasanmu?</legend>' +
             '<div class="option-list">' + renderConfidence("q" + question.no + "-c2") + '</div>' +
           '</fieldset>' +
-        '</article>'
-      ).join("");
+        '</article>';
+      }).join("");
 
       await renderMath();
     }
