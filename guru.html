@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FORTE — Dashboard Guru</title>
-
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="icon" type="image/png" href="./img/forte-logo.png">
-
+  <link rel="icon" type="image/svg+xml" href="./img/forte-logo.svg">
   <script src="./js/config.js" defer></script>
   <script src="./js/api.js" defer></script>
   <script src="./js/classify.js" defer></script>
@@ -16,23 +14,13 @@
 <body class="app-layout guru-page">
   <header class="topbar">
     <a class="brand" href="guru.html" aria-label="Dashboard Guru">
-      <img
-        src="./img/forte-logo.png"
-        alt="Logo FORTE"
-        width="40"
-        height="40"
-      >
-      <span class="brand-text">
-        <small>Dashboard Guru</small>
-      </span>
+      <img src="./img/forte-logo.svg" alt="Logo FORTE" width="40" height="40">
+      <span class="brand-text"><small>Dashboard Guru</small></span>
     </a>
-
     <div class="user-actions">
       <a href="tambah-akun.html" class="btn outline small">Tambah Akun</a>
       <a href="buat-tes.html" class="btn primary small">Buat Tes Baru</a>
-      <button type="button" class="btn outline small" id="logout">
-        Keluar
-      </button>
+      <button type="button" class="btn outline small" id="logout">Keluar</button>
     </div>
   </header>
 
@@ -43,28 +31,25 @@
         <h1>Dashboard Guru</h1>
         <p>Kelola tes diagnostik dan tinjau hasil konsepsi siswa.</p>
       </div>
-
-      <div class="welcome-mark" aria-hidden="true">F</div>
+      <div class="welcome-mark" aria-hidden="true">FORTE</div>
     </section>
 
     <section class="card profile-card">
       <div class="profile-header">
-        <div class="avatar guru-avatar">G</div>
+        <div class="avatar guru-avatar">Guru</div>
         <div>
           <h2 id="g-nama">Nama Guru</h2>
           <p class="subtitle">Identitas Pengajar</p>
         </div>
       </div>
-
-      <div class="profile-details grid-2">
-        <div class="profile-detail">
+      <div class="profile-details profile-details-grid">
+        <div class="profile-detail profile-detail-card">
           <span>NIP / ID Guru</span>
-          <strong id="g-nip">-</strong>
+          <strong class="profile-detail-value" id="g-nip">-</strong>
         </div>
-
-        <div class="profile-detail">
+        <div class="profile-detail profile-detail-card">
           <span>Mata Pelajaran</span>
-          <strong id="g-mapel">-</strong>
+          <strong class="profile-detail-value" id="g-mapel">-</strong>
         </div>
       </div>
     </section>
@@ -74,18 +59,11 @@
         <div>
           <p class="eyebrow">Aktivitas</p>
           <h2>Daftar Tes Anda</h2>
-          <p class="subtitle">
-            Pantau token tes dan buka hasil pengerjaan siswa.
-          </p>
+          <p class="subtitle">Pilih tombol Hasil untuk membuka laporan tes di halaman tersendiri.</p>
         </div>
-
-        <a href="buat-tes.html" class="btn primary">
-          + Buat Tes Baru
-        </a>
+        <a href="buat-tes.html" class="btn primary">+ Buat Tes Baru</a>
       </div>
-
       <p id="tests-msg" class="msg" aria-live="polite"></p>
-
       <div class="table-wrap">
         <table>
           <thead>
@@ -100,50 +78,6 @@
           <tbody id="tests-body"></tbody>
         </table>
       </div>
-    </section>
-
-    <section id="report" class="hidden stack">
-      <div class="card">
-        <div class="section-heading report-heading">
-          <div>
-            <p class="eyebrow">Analisis hasil</p>
-            <h2 id="report-title">Statistik Kelas</h2>
-          </div>
-
-          <button type="button" class="btn outline" id="export-csv">
-            Ekspor CSV
-          </button>
-        </div>
-
-        <div id="summary" class="summary-grid"></div>
-      </div>
-
-      <div class="report-grid">
-        <section class="card">
-          <h2>Analisis Per Soal</h2>
-          <div class="table-wrap">
-            <table>
-              <thead id="q-head"></thead>
-              <tbody id="q-body"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="card">
-          <h2>Pola Miskonsepsi Terbanyak</h2>
-          <ul id="patterns" class="pattern-list"></ul>
-        </section>
-      </div>
-
-      <section class="card">
-        <h2>Hasil Detail Per Siswa</h2>
-        <div class="table-wrap">
-          <table>
-            <thead id="s-head"></thead>
-            <tbody id="s-body"></tbody>
-          </table>
-        </div>
-      </section>
     </section>
   </main>
 </body>

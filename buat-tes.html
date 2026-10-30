@@ -6,7 +6,7 @@
   <title>FORTE — Buat Tes Baru</title>
 
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="icon" type="image/png" href="./img/forte-logo.png">
+  <link rel="icon" type="image/svg+xml" href="./img/forte-logo.svg">
 
   <script src="./js/config.js" defer></script>
   <script src="./js/api.js" defer></script>
@@ -16,7 +16,7 @@
   <header class="topbar">
     <a class="brand" href="guru.html" aria-label="Dashboard Guru">
       <img
-        src="./img/forte-logo.png"
+        src="./img/forte-logo.svg"
         alt="Logo FORTE"
         width="40"
         height="40"
@@ -32,11 +32,6 @@
   </header>
 
   <main class="container builder-container">
-    <a href="guru.html" class="btn outline small back-link">
-      <span aria-hidden="true">←</span>
-      Dashboard Guru
-    </a>
-
     <section class="builder-heading">
       <p class="eyebrow">Penyusunan tes</p>
       <h1>Buat Tes Diagnostik</h1>
@@ -84,13 +79,15 @@
             Lengkapi pertanyaan, pilihan jawaban, alasan, serta kuncinya.
           </p>
         </div>
+      </div>
 
+      <div id="question-list" class="question-list"></div>
+
+      <div class="builder-add-question-row">
         <button type="button" class="btn outline" id="add-question">
           + Tambah Soal
         </button>
       </div>
-
-      <div id="question-list" class="question-list"></div>
 
       <div class="builder-submit">
         <p id="create-test-msg" class="msg" aria-live="polite"></p>
@@ -151,6 +148,25 @@
           required
         ></textarea>
       </label>
+
+      <div class="question-image-section">
+        <label class="field question-image-upload">
+          <span>Gambar soal <small>(opsional)</small></span>
+          <input
+            type="file"
+            class="question-image-input"
+            accept="image/jpeg,image/png,image/webp"
+          >
+          <small class="field-help">JPG, PNG, atau WebP. Gambar akan dikompres otomatis.</small>
+        </label>
+        <p class="question-image-status" aria-live="polite"></p>
+        <div class="question-image-preview-wrap hidden">
+          <img class="question-image-preview" alt="Pratinjau gambar soal">
+          <button type="button" class="btn outline small remove-question-image">
+            Hapus gambar
+          </button>
+        </div>
+      </div>
 
       <div class="choice-grid">
         <fieldset class="choice-panel">

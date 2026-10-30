@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORTE — Hasil Tes</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./img/forte-logo.png">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="./js/config.js" defer></script>
+  <script src="./js/api.js" defer></script>
+  <script src="./js/classify.js" defer></script>
+  <script src="./js/hasil.js" defer></script>
+</head>
+<body class="app-layout report-page-body">
+  <header class="topbar">
+    <a class="brand" href="guru.html" aria-label="Kembali ke Dashboard Guru">
+      <img src="./img/forte-logo.png" alt="Logo FORTE" width="40" height="40">
+      <span class="brand-text"><small>Hasil Tes Diagnostik</small></span>
+    </a>
+    <div class="user-actions">
+      <a href="guru.html" class="btn outline small">Kembali ke Dashboard</a>
+      <button type="button" class="btn primary small" id="export-csv">Ekspor CSV</button>
+    </div>
+  </header>
+
+  <main id="report-page-content" class="container report-page">
+    <section class="report-page-heading">
+      <p class="eyebrow">Analisis hasil</p>
+      <h1 id="report-title">Memuat hasil tes...</h1>
+      <p id="report-subtitle" class="subtitle"></p>
+      <p id="report-msg" class="msg" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-heading report-section-heading">
+        <div>
+          <p class="eyebrow">Ringkasan</p>
+          <h2>Hasil Klasifikasi Konsepsi</h2>
+        </div>
+        <span id="response-count" class="report-count"></span>
+      </div>
+      <div id="summary" class="report-summary-grid"></div>
+    </section>
+
+    <section class="card">
+      <div class="report-section-heading">
+        <p class="eyebrow">Tinjauan soal</p>
+        <h2>Analisis Per Soal</h2>
+        <p class="subtitle">Teks rumus ditampilkan dalam format matematika.</p>
+      </div>
+      <div id="question-report" class="report-question-list"></div>
+    </section>
+
+    <section class="card">
+      <div class="report-section-heading">
+        <p class="eyebrow">Temuan kelas</p>
+        <h2>Pola Miskonsepsi Terbanyak</h2>
+      </div>
+      <ul id="patterns" class="pattern-list"></ul>
+    </section>
+
+    <section class="card">
+      <div class="report-section-heading">
+        <p class="eyebrow">Respons peserta</p>
+        <h2>Hasil Detail Per Siswa</h2>
+        <p class="subtitle">Jawaban dan alasan ditampilkan per siswa dan per soal.</p>
+      </div>
+      <div id="student-results" class="student-result-list"></div>
+    </section>
+  </main>
+</body>
+</html>
