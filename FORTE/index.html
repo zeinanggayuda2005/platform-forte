@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>FORTE — Masuk</title>
+
+  <link rel="stylesheet" href="./css/style.css?v=20261112-5">
+  <link rel="icon" type="image/svg+xml" href="./img/forte-logo.png">
+
+  <script src="./js/config.js" defer></script>
+  <script src="./js/api.js" defer></script>
+  <script src="./js/login.js" defer></script>
+</head>
+<body class="center-layout">
+  <main class="card login-card auth-card">
+    <header class="auth-brand">
+      <img src="./img/forte-logo.png" alt="Logo FORTE" width="58" height="58">
+      <p class="eyebrow">Four-Tier Rapid Test and Evaluation</p>
+      <h1 id="auth-title">Masuk ke FORTE</h1>
+      <p id="auth-description" class="subtitle">Masuk untuk melanjutkan ke ruang belajar.</p>
+    </header>
+
+    <section id="login-view" class="auth-view">
+      <form id="form-login" class="stack" novalidate>
+        <label class="field" for="username">
+          <span>NIS/NISN siswa atau NIP guru</span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Masukkan NIS/NISN atau NIP"
+            autocomplete="username"
+            required
+          >
+        </label>
+
+        <label class="field" for="password">
+          <span>Password</span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Masukkan password"
+            autocomplete="current-password"
+            required
+          >
+        </label>
+
+        <button type="submit" class="btn primary btn-large" id="login-button">
+          Masuk
+        </button>
+      </form>
+
+      <p class="auth-switch-line">
+        Siswa belum punya akun?
+        <button type="button" class="auth-switch" id="show-register">Daftar di sini</button>
+      </p>
+    </section>
+
+    <section id="register-view" class="auth-view hidden">
+      <form id="form-register-student" class="stack" novalidate>
+        <label class="field" for="register-username">
+          <span>NIS/NISN</span>
+          <input
+            type="text"
+            id="register-username"
+            name="username"
+            placeholder="Masukkan NIS atau NISN"
+            autocomplete="username"
+            minlength="3"
+            maxlength="30"
+            required
+          >
+        </label>
+
+        <label class="field" for="register-name">
+          <span>Nama lengkap</span>
+          <input
+            type="text"
+            id="register-name"
+            name="nama"
+            placeholder="Masukkan nama lengkap"
+            autocomplete="name"
+            maxlength="100"
+            required
+          >
+        </label>
+
+        <label class="field" for="register-class">
+          <span>Kelas</span>
+          <input
+            type="text"
+            id="register-class"
+            name="kelas"
+            placeholder="Contoh: XI-C"
+            maxlength="40"
+            required
+          >
+        </label>
+
+        <label class="field" for="register-password">
+          <span>Password <small>(minimal 8 karakter)</small></span>
+          <input
+            type="password"
+            id="register-password"
+            name="password"
+            placeholder="Buat password"
+            autocomplete="new-password"
+            minlength="8"
+            required
+          >
+        </label>
+
+        <label class="field" for="register-password-confirm">
+          <span>Ulangi password</span>
+          <input
+            type="password"
+            id="register-password-confirm"
+            name="password-confirm"
+            placeholder="Ulangi password"
+            autocomplete="new-password"
+            minlength="8"
+            required
+          >
+        </label>
+
+        <button type="submit" class="btn primary btn-large" id="register-button">
+          Buat Akun Siswa
+        </button>
+      </form>
+
+      <p class="auth-note">Pendaftaran mandiri hanya untuk siswa. Akun guru dibuat oleh administrator.</p>
+      <p class="auth-switch-line">
+        Sudah punya akun?
+        <button type="button" class="auth-switch" id="show-login">Kembali ke login</button>
+      </p>
+    </section>
+
+    <p id="msg" class="msg" aria-live="polite" role="status"></p>
+  </main>
+</body>
+</html>

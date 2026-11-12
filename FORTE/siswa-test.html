@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>FORTE — Mengerjakan Tes</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/svg+xml" href="./img/forte-logo.svg">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: [
+          "script",
+          "noscript",
+          "style",
+          "textarea",
+          "pre",
+          "code"
+        ]
+      }
+    };
+  </script>
+
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <script src="./js/config.js" defer></script>
+  <script src="./js/api.js" defer></script>
+  <script src="./js/siswa-test.js" defer></script>
+</head>
+
+<body class="app-layout">
+  <header class="topbar">
+    <a
+      class="brand"
+      href="siswa-dashboard.html"
+      aria-label="Dashboard Siswa"
+    >
+      <img
+        src="./img/forte-logo.png"
+        alt="Logo FORTE"
+        width="40"
+        height="40"
+      >
+      <span class="brand-text">
+        <small id="test-mapel">Tes Sedang Berlangsung</small>
+      </span>
+    </a>
+
+    <span id="who" class="user-badge"></span>
+  </header>
+
+  <main class="container">
+    <form id="test-form">
+      <div class="page-header">
+        <p class="eyebrow">Tes diagnostik</p>
+        <h1>Tes Four-Tier</h1>
+        <p class="subtitle">
+          Pilih jawaban dan alasan yang menurutmu paling tepat,
+          lalu tentukan tingkat keyakinanmu.
+        </p>
+      </div>
+
+      <div id="questions" class="questions-container"></div>
+
+      <div class="submit-area card">
+        <p id="msg" class="msg" aria-live="polite"></p>
+        <button
+          type="submit"
+          class="btn primary btn-large"
+          id="submit-btn"
+        >
+          Kirim Semua Jawaban
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="done"
+      class="card hidden center-text success-card"
+      aria-live="polite"
+    >
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h2>Jawaban Berhasil Terkirim</h2>
+      <p>
+        Terima kasih telah mengerjakan tes.
+        Hasil jawabanmu sudah dikirim ke guru.
+      </p>
+      <a class="btn secondary" href="siswa-dashboard.html">
+        Kembali ke Dashboard
+      </a>
+    </section>
+  </main>
+
+  <dialog
+    id="submit-confirmation"
+    class="confirm-dialog"
+    aria-labelledby="confirm-title"
+    aria-describedby="confirm-description"
+  >
+    <div class="confirm-dialog-content">
+      <div class="confirm-icon" aria-hidden="true">?</div>
+      <p class="eyebrow">Konfirmasi</p>
+      <h2 id="confirm-title">Kirim jawaban sekarang?</h2>
+      <p id="confirm-description">
+        Periksa kembali jawaban dan alasanmu. Setelah dikirim,
+        jawaban tidak dapat diubah.
+      </p>
+
+      <div class="confirm-actions">
+        <button
+          type="button"
+          class="btn outline"
+          id="cancel-submit"
+          autofocus
+        >
+          Periksa kembali
+        </button>
+        <button
+          type="button"
+          class="btn primary"
+          id="confirm-submit"
+        >
+          Ya, kirim jawaban
+        </button>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>

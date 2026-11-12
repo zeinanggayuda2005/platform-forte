@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>FORTE — Dashboard Guru</title>
+
+  <link rel="stylesheet" href="./css/style.css?v=20261112-6">
+  <link rel="icon" type="image/svg+xml" href="./img/forte-logo.svg">
+
+  <script src="./js/config.js" defer></script>
+  <script src="./js/api.js" defer></script>
+  <script src="./js/classify.js" defer></script>
+  <script src="./js/guru.js" defer></script>
+</head>
+<body class="app-layout guru-page">
+  <header class="topbar">
+    <a class="brand" href="guru.html" aria-label="Dashboard Guru">
+      <svg
+        class="brand-logo"
+        width="34"
+        height="34"
+        viewBox="0 0 48 48"
+        role="img"
+        aria-label="Logo FORTE"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="48" height="48" rx="12" fill="#10283e"></rect>
+        <g fill="none" stroke="#49d6c6" stroke-width="3.2" stroke-linecap="round">
+          <path d="M10 13h3m4 0h7M10 21h3m4 0h5M10 29h3m4 0h7M10 37h3m4 0h5"></path>
+        </g>
+        <path d="m31 7-12 23h9l-5 12 17-24h-10l7-11z" fill="#ffc45b"></path>
+      </svg>
+      <span class="brand-text">
+        <small>Dashboard Guru</small>
+      </span>
+    </a>
+
+    <nav class="user-actions" aria-label="Navigasi guru">
+      <a href="tambah-akun.html" class="btn outline small">Tambah Guru</a>
+      <a href="buat-tes.html" class="btn primary small">Buat Tes Baru</a>
+      <button type="button" class="btn outline small" id="logout">Keluar</button>
+    </nav>
+  </header>
+
+  <main class="container guru-container">
+    <section class="card profile-card" aria-labelledby="g-nama">
+      <div class="profile-header">
+        <div class="avatar guru-avatar" aria-hidden="true">Guru</div>
+        <div>
+          <h1 id="g-nama">Nama Guru</h1>
+          <p class="subtitle">Identitas Pengajar</p>
+        </div>
+      </div>
+
+      <div class="profile-details profile-details-grid">
+        <div class="profile-detail profile-detail-card">
+          <span>NIP / ID Guru</span>
+          <strong class="profile-detail-value" id="g-nip">-</strong>
+        </div>
+        <div class="profile-detail profile-detail-card">
+          <span>Mata Pelajaran</span>
+          <strong class="profile-detail-value" id="g-mapel">-</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="tests-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Aktivitas</p>
+          <h2 id="tests-title">Daftar Tes Anda</h2>
+          <p class="subtitle">Pilih tombol Hasil untuk membuka laporan tes di halaman tersendiri.</p>
+        </div>
+        <a href="buat-tes.html" class="btn primary">+ Buat Tes Baru</a>
+      </div>
+
+      <p id="tests-msg" class="msg" aria-live="polite"></p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Token</th>
+              <th scope="col">Kelas</th>
+              <th scope="col">Materi</th>
+              <th scope="col">Status</th>
+              <th scope="col">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tests-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>FORTE — Tambah Akun</title>
+
+  <link rel="stylesheet" href="./css/style.css?v=20261112-6">
+  <link rel="icon" type="image/svg+xml" href="./img/forte-logo.svg">
+
+  <script src="./js/config.js" defer></script>
+  <script src="./js/api.js" defer></script>
+  <script src="./js/tambah-akun.js" defer></script>
+</head>
+<body class="app-layout account-page">
+  <header class="topbar">
+    <a class="brand" href="guru.html" aria-label="Kembali ke Dashboard Guru">
+      <img class="brand-logo" src="./img/forte-logo.png" alt="Logo FORTE" width="40" height="40">
+      <span class="brand-text"><small>Tambah Akun</small></span>
+    </a>
+    <nav class="user-actions" aria-label="Navigasi akun">
+      <a href="guru.html" class="btn outline small">Kembali ke Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="container account-container">
+    <section class="card form-card account-card">
+      <div>
+        <p class="eyebrow">Manajemen pengguna</p>
+        <h1>Tambah Akun</h1>
+        <p class="subtitle">Buat akses untuk guru lain. Pendaftaran siswa tersedia di halaman login.</p>
+      </div>
+
+      <form id="add-account-form" class="stack" novalidate>
+        <label class="field" for="account-username">
+          <span>NIP / ID Guru</span>
+          <input
+            type="text"
+            id="account-username"
+            name="username"
+            placeholder="Masukkan NIP atau ID guru"
+            autocomplete="off"
+            minlength="3"
+            maxlength="30"
+            required
+          >
+        </label>
+
+        <label class="field" for="account-name">
+          <span>Nama lengkap</span>
+          <input
+            type="text"
+            id="account-name"
+            name="nama"
+            placeholder="Masukkan nama lengkap guru"
+            autocomplete="name"
+            maxlength="100"
+            required
+          >
+        </label>
+
+        <label class="field" for="account-subject">
+          <span>Mata pelajaran</span>
+          <input
+            type="text"
+            id="account-subject"
+            name="mapel"
+            placeholder="Contoh: Fisika"
+            maxlength="80"
+            required
+          >
+        </label>
+
+        <label class="field" for="account-password">
+          <span>Password <small>(minimal 8 karakter)</small></span>
+          <input
+            type="password"
+            id="account-password"
+            name="password"
+            placeholder="Buat password akun"
+            autocomplete="new-password"
+            minlength="8"
+            required
+          >
+        </label>
+
+        <label class="field" for="account-password-confirm">
+          <span>Ulangi password</span>
+          <input
+            type="password"
+            id="account-password-confirm"
+            name="password-confirm"
+            placeholder="Ulangi password"
+            autocomplete="new-password"
+            minlength="8"
+            required
+          >
+        </label>
+
+        <button type="submit" class="btn primary btn-large" id="add-account-button">
+          Tambahkan Akun Guru
+        </button>
+      </form>
+
+      <p id="add-account-msg" class="msg" aria-live="polite" role="status"></p>
+    </section>
+  </main>
+</body>
+</html>
