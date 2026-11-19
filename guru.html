@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
   <title>FORTE — Dashboard Guru</title>
-  <link rel="stylesheet" href="./css/style.css?v=20261030-4">
+
+  <link rel="stylesheet" href="./css/style.css?v=20261112-6">
   <link rel="icon" type="image/svg+xml" href="./img/forte-logo.svg">
 
   <script src="./js/config.js" defer></script>
@@ -30,33 +32,24 @@
         </g>
         <path d="m31 7-12 23h9l-5 12 17-24h-10l7-11z" fill="#ffc45b"></path>
       </svg>
-
-      <span class="brand-text"><small>Dashboard Guru</small></span>
+      <span class="brand-text">
+        <small>Dashboard Guru</small>
+      </span>
     </a>
 
-    <div class="user-actions">
-      <a href="tambah-akun.html" class="btn outline small">Tambah Akun</a>
+    <nav class="user-actions" aria-label="Navigasi guru">
+      <a href="tambah-akun.html" class="btn outline small">Tambah Guru</a>
       <a href="buat-tes.html" class="btn primary small">Buat Tes Baru</a>
-      <button type="button" class="btn outline small" id="logout">
-        Keluar
-      </button>
-    </div>
+      <button type="button" class="btn outline small" id="logout">Keluar</button>
+    </nav>
   </header>
 
   <main class="container guru-container">
-    <section class="guru-welcome">
-      <div>
-        <h1>Ruang Kerja Guru</h1>
-        <p>Kelola tes diagnostik dan tinjau hasil konsepsi siswa.</p>
-      </div>
-      <div class="welcome-mark" aria-hidden="true">FORTE</div>
-    </section>
-
-    <section class="card profile-card">
+    <section class="card profile-card" aria-labelledby="g-nama">
       <div class="profile-header">
-        <div class="avatar guru-avatar">Guru</div>
+        <div class="avatar guru-avatar" aria-hidden="true">Guru</div>
         <div>
-          <h2 id="g-nama">Nama Guru</h2>
+          <h1 id="g-nama">Nama Guru</h1>
           <p class="subtitle">Identitas Pengajar</p>
         </div>
       </div>
@@ -66,7 +59,6 @@
           <span>NIP / ID Guru</span>
           <strong class="profile-detail-value" id="g-nip">-</strong>
         </div>
-
         <div class="profile-detail profile-detail-card">
           <span>Mata Pelajaran</span>
           <strong class="profile-detail-value" id="g-mapel">-</strong>
@@ -74,16 +66,13 @@
       </div>
     </section>
 
-    <section class="card">
+    <section class="card" aria-labelledby="tests-title">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Aktivitas</p>
-          <h2>Daftar Tes Anda</h2>
-          <p class="subtitle">
-            Pilih tombol Hasil untuk membuka laporan tes di halaman tersendiri.
-          </p>
+          <h2 id="tests-title">Daftar Tes Anda</h2>
+          <p class="subtitle">Pilih tombol Hasil untuk membuka laporan tes di halaman tersendiri.</p>
         </div>
-
         <a href="buat-tes.html" class="btn primary">+ Buat Tes Baru</a>
       </div>
 
@@ -93,11 +82,11 @@
         <table>
           <thead>
             <tr>
-              <th>Token</th>
-              <th>Kelas</th>
-              <th>Materi</th>
-              <th>Status</th>
-              <th>Aksi</th>
+              <th scope="col">Token</th>
+              <th scope="col">Kelas</th>
+              <th scope="col">Materi</th>
+              <th scope="col">Status</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody id="tests-body"></tbody>
